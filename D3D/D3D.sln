@@ -10,6 +10,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj",
 		{45702BEE-07C6-4666-BDA0-58CCAFA32936} = {45702BEE-07C6-4666-BDA0-58CCAFA32936}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{31EAC804-741B-4955-95B1-3D078A52B4C7}"
+	ProjectSection(SolutionItems) = preProject
+		_Shaders\01_Line.fx = _Shaders\01_Line.fx
+		_Shaders\02_LineColor.fx = _Shaders\02_LineColor.fx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
