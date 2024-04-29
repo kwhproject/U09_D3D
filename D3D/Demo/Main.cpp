@@ -7,10 +7,13 @@
 #include "PolygonDemo.h"
 #include "PlaneDemo.h"
 #include "WorldDemo.h"
+#include "MultiWorldDemo.h"
+#include "IndexBufferDemo.h"
+#include "GridDemo.h"
 
 void Main::Initialize()
 {
-	Push(new WorldDemo());
+	Push(new GridDemo());
 }
 
 
