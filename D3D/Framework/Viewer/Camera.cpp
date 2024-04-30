@@ -56,21 +56,42 @@ void Camera::RotationDegree(Vector3& vec)
 
 void Camera::RotationDegree(Vector3* vec)
 {
-	*vec = rotation * 180 / Math::PI;
+	*vec = rotation * 57.29579f;
 }
 
 void Camera::GetMatrix(Matrix* matrix)
 {
+	*matrix = matView;
+
+
 }
 
 void Camera::Rotation()
 {
+	//Matrix Pitch, Yaw, Roll;
+	//D3DXMatrixRotationX(&Pitch, rotation.x);
+	//D3DXMatrixRotationY(&Yaw, rotation.y);
+	//D3DXMatrixRotationZ(&Roll, rotation.z);
+	//
+	//matRotation = Pitch * Yaw * Roll;
+	// world = S * R * T;
+
+	D3DXMatrixRotationYawPitchRoll(&matRotation, rotation.y, rotation.x, rotation.z);
+
+	D3DXVec3TransformNormal(&forward, &Vector3(0, 0, 1), &matRotation);
+	D3DXVec3TransformNormal(&right, &Vector3(1, 0, 0), &matRotation);
+	D3DXVec3TransformNormal(&up, &Vector3(0, 1, 0), &matRotation);		// float3(0, 1, 0) * matRotation;
+	// D3DXVec3TransformCoord() 방향 위치 둘다 적용할 때 쓰는 함수
+
+
 }
 
 void Camera::Move()
 {
+	View();
 }
 
 void Camera::View()
 {
+	D3DXMatrixLookAtLH(&matView, &position, &(position + forward), &up);
 }

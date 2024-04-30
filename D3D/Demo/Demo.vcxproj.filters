@@ -30,6 +30,12 @@
     <ClCompile Include="GridDemo.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
+    <ClCompile Include="CubeDemo.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureDemo.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -61,6 +67,12 @@
     <ClInclude Include="GridDemo.h">
       <Filter>Meshes</Filter>
     </ClInclude>
+    <ClInclude Include="CubeDemo.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureDemo.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vertex">
@@ -71,6 +83,9 @@
     </Filter>
     <Filter Include="Transform">
       <UniqueIdentifier>{2fc20f7d-1eb9-40ba-a1ca-7d342b88297a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{7896d4fb-2a3a-4a43-9046-bbbb7e77def7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
