@@ -35,7 +35,7 @@ void Camera::Rotation(float x, float y, float z)
 void Camera::Rotation(Vector3& vec)
 {
 	rotation = vec;
-
+	
 	Rotation();
 }
 
@@ -52,6 +52,8 @@ void Camera::RotationDegree(float x, float y, float z)
 void Camera::RotationDegree(Vector3& vec)
 {
 	rotation = vec * 0.017453f;
+
+	Rotation(rotation);
 }
 
 void Camera::RotationDegree(Vector3* vec)
