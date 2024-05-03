@@ -14,10 +14,11 @@
 #include "TextureDemo.h"
 #include "SamplerStateDemo.h"
 #include "TerrainDemo.h"
+#include "GetHeightDemo.h"
 
 void Main::Initialize()
 {
-	Push(new TerrainDemo());
+	Push(new GetHeightDemo());
 }
 
 

@@ -68,6 +68,12 @@
     <ClCompile Include="Renders\DebugLine.cpp">
       <Filter>Renders</Filter>
     </ClCompile>
+    <ClCompile Include="StaticMeshes\StaticMesh.cpp">
+      <Filter>StaticMeshes</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshes\StaticMesh_Quad.cpp">
+      <Filter>StaticMeshes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
@@ -84,6 +90,9 @@
     </Filter>
     <Filter Include="Environment">
       <UniqueIdentifier>{d1b4e448-6e3e-410c-8769-2ab8e896ba76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMeshes">
+      <UniqueIdentifier>{3028a64a-86a8-4ef6-85cc-e7bd6867bb78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +165,12 @@
     </ClInclude>
     <ClInclude Include="Renders\DebugLine.h">
       <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\StaticMesh.h">
+      <Filter>StaticMeshes</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshes\StaticMesh_Quad.h">
+      <Filter>StaticMeshes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

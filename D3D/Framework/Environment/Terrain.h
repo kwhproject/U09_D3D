@@ -9,6 +9,9 @@ public:
 	void Update();
 	void Render();
 
+	float GetHeightByInterp(Vector3 position);
+	float GetHeightByRaycast(Vector3 position);
+
 	void VisibleNormal();
 
 	UINT& Pass() { return pass; }
