@@ -1,20 +1,7 @@
-// Parameters
-matrix World, View, Projection;
+#include "00_Global.fx"
+
 float3 LightDirection;
 Texture2D DiffuseMap;
-
-// Stats
-SamplerState LinearSampler
-{
-    Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Wrap;
-    AddressV = Wrap;
-};
-
-RasterizerState FillMode_WireFrame
-{
-    FillMode = WireFrame;
-};
 
 // Render
 struct VertexInput
@@ -34,12 +21,11 @@ struct VertexOutput
 VertexOutput VS(VertexInput input)
 {
     VertexOutput output;
-    output.Position = mul(input.Position, World);
-    output.Position = mul(output.Position, View);
-    output.Position = mul(output.Position, Projection);
+    output.Position = WorldPosition(input.Position);
+    output.Position = ViewProjection(output.Position);
 	
+    output.Normal = WorldNormal(input.Normal);
     output.Uv = input.Uv;
-    output.Normal = mul(input.Normal, (float3x3) World);
 	
     return output;
 }
@@ -63,17 +49,6 @@ float4 PS_WireFrame(VertexOutput input) : SV_Target
 
 technique11 T0
 {
-    pass P0
-    {
-        SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetPixelShader(CompileShader(ps_5_0, PS_Diffuse()));
-    }
-
-    pass P1
-    {
-        SetRasterizerState(FillMode_WireFrame);
-
-        SetVertexShader(CompileShader(vs_5_0, VS()));
-        SetPixelShader(CompileShader(ps_5_0, PS_WireFrame()));
-    }
+    P_VP(P0, VS, PS_Diffuse)
+    P_RS_VP(P1, FillMode_WireFrame, VS, PS_WireFrame)
 }

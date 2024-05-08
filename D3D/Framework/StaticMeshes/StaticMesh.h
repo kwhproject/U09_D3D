@@ -39,7 +39,6 @@ protected:
 	virtual void Create() = 0;
 
 private:
-	void CreateBuffer();
 	void UpdateWorld();
 
 protected:
@@ -88,8 +87,8 @@ private:
 
 	Matrix world;
 
-	ID3D11Buffer* vertexBuffer = nullptr;
-	ID3D11Buffer* indexBuffer = nullptr;
+	VertexBuffer* vertexBuffer = nullptr;
+	IndexBuffer* indexBuffer = nullptr;
 
 	ID3DX11EffectMatrixVariable* sWorld, *sView, *sProjection;
 
