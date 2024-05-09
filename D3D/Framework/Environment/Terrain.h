@@ -1,6 +1,6 @@
 #pragma once
 
-class Terrain
+class Terrain : public StaticMeshRenderer
 {
 public:
 	Terrain(Shader* shader, wstring heightMapPath);
@@ -13,8 +13,6 @@ public:
 	float GetHeightByRaycast(Vector3 position);
 
 	void VisibleNormal();
-
-	UINT& Pass() { return pass; }
 
 	void BaseMap(wstring file);
 	void LayerMap(wstring file);
@@ -37,20 +35,10 @@ private:
 	};
 
 private:
-	Shader* shader;
-	UINT pass = 0;
-
 	UINT width, height;
 
-	UINT vertexCount;
 	VertexTerrain* vertices;
-	VertexBuffer* vertexBuffer;
-
-	UINT indexCount;
 	UINT* indices;
-	IndexBuffer* indexBuffer;
-
-	Matrix world;
 
 	Texture* heightMap;
 	Texture* baseMap = nullptr;
