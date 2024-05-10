@@ -11,10 +11,23 @@ struct asBone
 	Matrix Transform;
 };
 
+struct asMeshPart
+{
+	string MaterialName;
+
+	UINT StartVertex;
+	UINT VertexCount;
+
+	UINT StartIndex;
+	UINT IndexCount;
+};
+
 struct asMesh
 {
 	int BoneIndex;
 
 	vector<SkeletalMesh::VertexSkeletalMesh> Vertices;
-	vector<UINT> indices;
+	vector<UINT> Indices;
+
+	vector<asMeshPart*> MeshParts;
 };
