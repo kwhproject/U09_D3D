@@ -59,7 +59,7 @@ public:
 	int BoneIndex() { return boneIndex; }
 	SkeletalMesh_Bone* Bone() { return bone; }
 
-	void Transforms(Matrix& transforms);		// Component(bone) Space
+	void Transforms(Matrix* transforms);		// Component(bone) Space
 	void SetTransforms(Transform* transform);	// Actor(World)Transform
 
 private:

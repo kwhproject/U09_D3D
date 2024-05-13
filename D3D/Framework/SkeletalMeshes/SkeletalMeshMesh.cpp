@@ -82,7 +82,7 @@ void SkeletalMesh_Mesh::Render()
 		part->Render();
 }
 
-void SkeletalMesh_Mesh::Transforms(Matrix& transforms)
+void SkeletalMesh_Mesh::Transforms(Matrix* transforms)
 {
 	memcpy(boneDesc.Transforms, transforms, sizeof(Matrix) * MAX_BONE_COUNT);
 }
@@ -98,10 +98,12 @@ void SkeletalMesh_Mesh::SetTransforms(Transform* transform)
 
 void SkeletalMesh_MeshPart::Update()
 {
+	
 }
 
 void SkeletalMesh_MeshPart::Render()
 {
+	shader->DrawIndexed(0, pass, indexCount, startIndex);
 }
 
 void SkeletalMesh_MeshPart::Binding(SkeletalMesh* skeletalMesh)
@@ -110,4 +112,5 @@ void SkeletalMesh_MeshPart::Binding(SkeletalMesh* skeletalMesh)
 
 void SkeletalMesh_MeshPart::SetShader(Shader* shader)
 {
+	this->shader = shader;
 }
