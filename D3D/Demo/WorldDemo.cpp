@@ -8,14 +8,14 @@ void WorldDemo::Initialize()
 	D3DXMatrixIdentity(&world);
 
 	//Plane
-	vertices[0].Position = Vector3(-0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[1].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f , 0.f);
-	vertices[2].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[3].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[4].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f , 0.f);
-	vertices[5].Position = Vector3(+0.5f + 0.5f, +0.5f + 0.5f , 0.f);
+	vertices[0].Position = Vector3(-0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[1].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f, 0.f);
+	vertices[2].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[3].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[4].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f, 0.f);
+	vertices[5].Position = Vector3(+0.5f + 0.5f, +0.5f + 0.5f, 0.f);
 
-	// Create VertexBuffer
+	//Create VertexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -27,9 +27,6 @@ void WorldDemo::Initialize()
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
-
-	
-	
 }
 
 void WorldDemo::Destroy()
@@ -41,7 +38,7 @@ void WorldDemo::Destroy()
 void WorldDemo::Update()
 {
 #ifdef MatrixMember
-	// Position
+	//Position
 	if (Keyboard::Get()->Press('D'))
 		world._41 += 2.f * Time::Delta();
 	else if (Keyboard::Get()->Press('A'))
@@ -52,9 +49,7 @@ void WorldDemo::Update()
 	else if (Keyboard::Get()->Press('S'))
 		world._42 -= 2.f * Time::Delta();
 
-	// TODO D3DXMatrixTranslation();
-
-	// Scale
+	//Scale
 	if (Keyboard::Get()->Press(VK_RIGHT))
 		world._11 += 2.f * Time::Delta();
 	else if (Keyboard::Get()->Press(VK_LEFT))
@@ -66,7 +61,7 @@ void WorldDemo::Update()
 		world._22 -= 2.f * Time::Delta();
 #endif
 
-	// Position
+	//Position
 	static Vector3 position;
 
 	if (Keyboard::Get()->Press('D'))
@@ -79,8 +74,7 @@ void WorldDemo::Update()
 	else if (Keyboard::Get()->Press('S'))
 		position.y -= 2.f * Time::Delta();
 
-
-	// Scale
+	//Scale
 	static Vector3 scale = Vector3(1, 1, 1);
 
 	if (Keyboard::Get()->Press(VK_RIGHT))
@@ -94,7 +88,6 @@ void WorldDemo::Update()
 		scale.y -= 2.f * Time::Delta();
 
 	static float roll;
-
 	roll += Time::Delta();
 
 	Matrix S, R, T;
@@ -108,10 +101,10 @@ void WorldDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-
+	
 	shader->AsMatrix("World")->SetMatrix(world);
 	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
 	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());

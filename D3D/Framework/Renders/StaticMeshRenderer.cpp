@@ -22,7 +22,6 @@ void StaticMeshRenderer::Initialize()
 	perFrame = new PerFrame(shader);
 }
 
-
 StaticMeshRenderer::~StaticMeshRenderer()
 {
 	SafeDelete(transform);
@@ -43,6 +42,7 @@ void StaticMeshRenderer::Update()
 
 void StaticMeshRenderer::Render()
 {
+
 	if (vertexBuffer != nullptr)
 	{
 		vertexBuffer->IASet();
@@ -56,4 +56,5 @@ void StaticMeshRenderer::Render()
 	transform->Render();
 	perFrame->Render();
 }
+
 

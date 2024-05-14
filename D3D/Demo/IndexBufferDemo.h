@@ -5,7 +5,6 @@
 class IndexBufferDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -29,6 +28,5 @@ private:
 	UINT indices[6];
 	ID3D11Buffer* indexBuffer;
 
-	Matrix world; 
-
+	Matrix world;
 };

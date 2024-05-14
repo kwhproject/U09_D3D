@@ -7,6 +7,7 @@ public:
 	~Freedom() = default;
 
 	void Update() override;
+
 	void Speed(float moveSpeed, float rotationSpeed = 5.f);
 
 private:

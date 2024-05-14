@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{45702BEE-07C6-4666-BDA0-58CCAFA32936}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{CCA8113A-336A-47B3-A9FF-B04E6EA73448}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj", "{1FED8CF3-AC71-4493-99BB-728E36A219C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo\Demo.vcxproj", "{5773D23F-5E33-43C9-8FD9-99B1C7EED35A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936} = {45702BEE-07C6-4666-BDA0-58CCAFA32936}
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448} = {CCA8113A-336A-47B3-A9FF-B04E6EA73448}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{31EAC804-741B-4955-95B1-3D078A52B4C7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{F08E145E-931C-464E-AEA9-509D6C889E2F}"
 	ProjectSection(SolutionItems) = preProject
 		_Shaders\00_Global.fx = _Shaders\00_Global.fx
 		_Shaders\01_Line.fx = _Shaders\01_Line.fx
@@ -31,9 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{31
 		_Shaders\16_SkeletalMesh.fx = _Shaders\16_SkeletalMesh.fx
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Importer", "Importer\Importer.vcxproj", "{144C1B1A-5D53-4937-83D8-31D227A0BA2B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Importer", "Importer\Importer.vcxproj", "{6100A31C-7127-4F48-8515-7D0FD6CBD19C}"
 	ProjectSection(ProjectDependencies) = postProject
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936} = {45702BEE-07C6-4666-BDA0-58CCAFA32936}
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448} = {CCA8113A-336A-47B3-A9FF-B04E6EA73448}
 	EndProjectSection
 EndProject
 Global
@@ -42,23 +42,23 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936}.Debug|x86.ActiveCfg = Debug|Win32
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936}.Debug|x86.Build.0 = Debug|Win32
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936}.Release|x86.ActiveCfg = Release|Win32
-		{45702BEE-07C6-4666-BDA0-58CCAFA32936}.Release|x86.Build.0 = Release|Win32
-		{1FED8CF3-AC71-4493-99BB-728E36A219C3}.Debug|x86.ActiveCfg = Debug|Win32
-		{1FED8CF3-AC71-4493-99BB-728E36A219C3}.Debug|x86.Build.0 = Debug|Win32
-		{1FED8CF3-AC71-4493-99BB-728E36A219C3}.Release|x86.ActiveCfg = Release|Win32
-		{1FED8CF3-AC71-4493-99BB-728E36A219C3}.Release|x86.Build.0 = Release|Win32
-		{144C1B1A-5D53-4937-83D8-31D227A0BA2B}.Debug|x86.ActiveCfg = Debug|Win32
-		{144C1B1A-5D53-4937-83D8-31D227A0BA2B}.Debug|x86.Build.0 = Debug|Win32
-		{144C1B1A-5D53-4937-83D8-31D227A0BA2B}.Release|x86.ActiveCfg = Release|Win32
-		{144C1B1A-5D53-4937-83D8-31D227A0BA2B}.Release|x86.Build.0 = Release|Win32
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448}.Debug|x86.ActiveCfg = Debug|Win32
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448}.Debug|x86.Build.0 = Debug|Win32
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448}.Release|x86.ActiveCfg = Release|Win32
+		{CCA8113A-336A-47B3-A9FF-B04E6EA73448}.Release|x86.Build.0 = Release|Win32
+		{5773D23F-5E33-43C9-8FD9-99B1C7EED35A}.Debug|x86.ActiveCfg = Debug|Win32
+		{5773D23F-5E33-43C9-8FD9-99B1C7EED35A}.Debug|x86.Build.0 = Debug|Win32
+		{5773D23F-5E33-43C9-8FD9-99B1C7EED35A}.Release|x86.ActiveCfg = Release|Win32
+		{5773D23F-5E33-43C9-8FD9-99B1C7EED35A}.Release|x86.Build.0 = Release|Win32
+		{6100A31C-7127-4F48-8515-7D0FD6CBD19C}.Debug|x86.ActiveCfg = Debug|Win32
+		{6100A31C-7127-4F48-8515-7D0FD6CBD19C}.Debug|x86.Build.0 = Debug|Win32
+		{6100A31C-7127-4F48-8515-7D0FD6CBD19C}.Release|x86.ActiveCfg = Release|Win32
+		{6100A31C-7127-4F48-8515-7D0FD6CBD19C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {33B3A22C-A450-4E03-B749-22D063A3814F}
+		SolutionGuid = {5F6F23F7-1F7D-4224-8A0C-82A63C795D55}
 	EndGlobalSection
 EndGlobal

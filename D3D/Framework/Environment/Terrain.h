@@ -12,7 +12,7 @@ public:
 	float GetHeightByInterp(Vector3 position);
 	float GetHeightByRaycast(Vector3 position);
 
-	void VisibleNormal();
+	void visibleNormal();
 
 	void BaseMap(wstring file);
 	void LayerMap(wstring file);
@@ -22,9 +22,10 @@ public:
 	void Intensity(float intensity) { this->intensity = intensity; }
 
 private:
-	void CreateVertexData();	
-	void CreateIndexData();		
-	void CreateNormalData();		
+	void CreateVertexData();
+	void CreateIndexData();
+	void CreateNormalData();
+
 
 private:
 	struct VertexTerrain
@@ -33,6 +34,7 @@ private:
 		Vector3 Normal = Vector3(0, 0, 0);
 		Vector2 Uv = Vector2(0, 0);
 	};
+
 
 private:
 	UINT width, height;

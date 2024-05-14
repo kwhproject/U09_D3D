@@ -40,10 +40,10 @@
       <Filter>Texture</Filter>
     </ClCompile>
     <ClCompile Include="TerrainDemo.cpp">
-      <Filter>Environment</Filter>
+      <Filter>Enivironment</Filter>
     </ClCompile>
     <ClCompile Include="GetHeightDemo.cpp">
-      <Filter>Environment</Filter>
+      <Filter>Enivironment</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshDemo.cpp">
       <Filter>StaticMeshes</Filter>
@@ -92,10 +92,10 @@
       <Filter>Texture</Filter>
     </ClInclude>
     <ClInclude Include="TerrainDemo.h">
-      <Filter>Environment</Filter>
+      <Filter>Enivironment</Filter>
     </ClInclude>
     <ClInclude Include="GetHeightDemo.h">
-      <Filter>Environment</Filter>
+      <Filter>Enivironment</Filter>
     </ClInclude>
     <ClInclude Include="StaticMeshDemo.h">
       <Filter>StaticMeshes</Filter>
@@ -106,22 +106,22 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vertex">
-      <UniqueIdentifier>{4f93f0ec-d000-4e41-9d10-d554e461b544}</UniqueIdentifier>
+      <UniqueIdentifier>{27dcaae6-3f85-445b-97b6-4b39c4dbfea3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Meshes">
-      <UniqueIdentifier>{e850b5d3-bff6-4ba6-affb-907644d3f244}</UniqueIdentifier>
+      <UniqueIdentifier>{5902140e-fb73-4bb8-b358-7166ae3ff8ce}</UniqueIdentifier>
     </Filter>
     <Filter Include="Transform">
-      <UniqueIdentifier>{2fc20f7d-1eb9-40ba-a1ca-7d342b88297a}</UniqueIdentifier>
+      <UniqueIdentifier>{cbd28ad3-8fb2-49b1-b5e5-c0f5dca0e564}</UniqueIdentifier>
     </Filter>
     <Filter Include="Texture">
-      <UniqueIdentifier>{7896d4fb-2a3a-4a43-9046-bbbb7e77def7}</UniqueIdentifier>
+      <UniqueIdentifier>{7fd8d33a-f611-4eec-bd61-259a869214b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Environment">
-      <UniqueIdentifier>{e0ddd7cd-112e-42b2-b0ed-afb53ccf5b2a}</UniqueIdentifier>
+    <Filter Include="Enivironment">
+      <UniqueIdentifier>{021bf102-f662-455f-a78d-4385e739b661}</UniqueIdentifier>
     </Filter>
     <Filter Include="StaticMeshes">
-      <UniqueIdentifier>{ca677b8b-0db2-4fb6-a111-25871200aea2}</UniqueIdentifier>
+      <UniqueIdentifier>{2a0d921d-7b4d-4933-b522-8dd1d12c6e72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

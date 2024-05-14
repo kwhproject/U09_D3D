@@ -13,7 +13,7 @@ void PlaneDemo::Initialize()
 	vertices[4].Position = Vector3(-0.5f, +0.5f, 0.f);
 	vertices[5].Position = Vector3(+0.5f, +0.5f, 0.f);
 
-	// Create VertexBuffer
+	//Create VertexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -25,9 +25,6 @@ void PlaneDemo::Initialize()
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
-
-	
-	
 }
 
 void PlaneDemo::Destroy()
@@ -44,10 +41,10 @@ void PlaneDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-
+	
 	static bool bWireFrame;
 	ImGui::Checkbox("WireFrame", &bWireFrame);
 

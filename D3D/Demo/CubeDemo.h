@@ -5,7 +5,6 @@
 class CubeDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -37,7 +36,6 @@ private:
 	Vector3 position = Vector3(64, 0.5f, 64);
 	Vector3 rotation = Vector3(0, 0, 0);
 	Vector3 scale = Vector3(1, 1, 2);
-	
 
-	Matrix world; 
+	Matrix world;
 };

@@ -8,14 +8,14 @@ void MultiWorldDemo::Initialize()
 	D3DXMatrixIdentity(&world);
 
 	//Plane
-	vertices[0].Position = Vector3(-0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[1].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f , 0.f);
-	vertices[2].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[3].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f , 0.f);
-	vertices[4].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f , 0.f);
-	vertices[5].Position = Vector3(+0.5f + 0.5f, +0.5f + 0.5f , 0.f);
+	vertices[0].Position = Vector3(-0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[1].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f, 0.f);
+	vertices[2].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[3].Position = Vector3(+0.5f + 0.5f, -0.5f + 0.5f, 0.f);
+	vertices[4].Position = Vector3(-0.5f + 0.5f, +0.5f + 0.5f, 0.f);
+	vertices[5].Position = Vector3(+0.5f + 0.5f, +0.5f + 0.5f, 0.f);
 
-	// Create VertexBuffer
+	//Create VertexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -27,9 +27,6 @@ void MultiWorldDemo::Initialize()
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
-
-	
-	
 }
 
 void MultiWorldDemo::Destroy()
@@ -47,14 +44,14 @@ void MultiWorldDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-
+	
 	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
 	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());
-
-	// 위치(T) 0,0,0 크기(S) 1,2,1
+	
+	//T : 0,0,0 / S : 1,2,1
 	Matrix S, T;
 	D3DXMatrixScaling(&S, 1, 2, 1);
 	D3DXMatrixTranslation(&T, 0, 0, 0);
@@ -67,8 +64,7 @@ void MultiWorldDemo::Render()
 
 	shader->Draw(0, bWireFrame ? 1 : 0, 6);
 
-
-	// 위치(T) 2,2,2 크기(S) 2,1,1
+	//T : 2, 2, 2 / S : 2, 1, 1
 	D3DXMatrixScaling(&S, 2, 1, 1);
 	D3DXMatrixTranslation(&T, 2, 2, 2);
 	world = S * T;
@@ -76,5 +72,4 @@ void MultiWorldDemo::Render()
 	shader->AsMatrix("World")->SetMatrix(world);
 
 	shader->Draw(0, bWireFrame ? 1 : 0, 6);
-
 }

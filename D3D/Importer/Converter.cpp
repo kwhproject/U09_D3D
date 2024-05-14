@@ -26,7 +26,8 @@ Converter::~Converter()
 
 void Converter::ReadFile(wstring file)
 {
-	this->file = L"../../_Assets/" + file;
+	this->file = L"../../_Assets/" +  file;
+
 	scene = importer->ReadFile
 	(
 		String::ToString(this->file),
@@ -36,14 +37,15 @@ void Converter::ReadFile(wstring file)
 		| aiProcess_GenNormals
 		| aiProcess_CalcTangentSpace
 	);
-	
+
 	if (scene == nullptr)
 	{
 		string str = importer->GetErrorString();
-
+		
 		MessageBoxA(D3D::GetDesc().Handle, str.c_str(), "Import Error", MB_OK);
 		exit(-1);
 	}
+		
 }
 
 void Converter::ExportMesh(wstring savePath)
@@ -58,10 +60,10 @@ void Converter::ReadBoneData(aiNode* node, int index, int parent)
 	bone->Index = index;
 	bone->Parent = parent;
 	bone->Name = node->mName.C_Str();
-
-	Matrix transform = Matrix(node->mTransformation[0]);
-	D3DXMatrixTranspose(&bone->Transform, &transform);
 	
+	Matrix transform(node->mTransformation[0]);
+	D3DXMatrixTranspose(&bone->Transform, &transform);
+
 	Matrix matParent;
 	if (parent < 0)
 		D3DXMatrixIdentity(&matParent);
@@ -70,7 +72,7 @@ void Converter::ReadBoneData(aiNode* node, int index, int parent)
 
 	bone->Transform = bone->Transform * matParent;
 	bones.push_back(bone);
-
+	
 	ReadMeshData(node, index);
 
 	for (UINT i = 0; i < node->mNumChildren; i++)
@@ -92,33 +94,33 @@ void Converter::ReadMeshData(aiNode* node, int index)
 		UINT startVertex = mesh->Vertices.size();
 		UINT startIndex = mesh->Indices.size();
 
-		// Read Vertices
+		//Read Vertices
 		for (UINT v = 0; v < srcMesh->mNumVertices; v++)
 		{
 			SkeletalMesh::VertexSkeletalMesh vertex;
-			memcpy(&vertex.Position, &srcMesh->mVertices[v], sizeof(Vector3));
+			memcpy(&vertex.Position,  &srcMesh->mVertices[v], sizeof(Vector3));
 
 			if (srcMesh->HasTextureCoords(0))
 				memcpy(&vertex.Uv, &srcMesh->mTextureCoords[0][v], sizeof(Vector2));
-
+			
 			if (srcMesh->HasNormals())
-				memcpy(&vertex.Uv, &srcMesh->mNormals[v], sizeof(Vector3));
+				memcpy(&vertex.Normal, &srcMesh->mNormals[v], sizeof(Vector3));
 
 			mesh->Vertices.push_back(vertex);
 		}
 
-		// Read Indices
+		//Read Indices
 		for (UINT f = 0; f < srcMesh->mNumFaces; f++)
 		{
 			aiFace& face = srcMesh->mFaces[f];
-			
-			for (UINT k = 0; k < face.mNumIndices; k++)
-				mesh->Indices.push_back(face.mIndices[k + startVertex]);
 
+			for (UINT k = 0; k < face.mNumIndices; k++)
+				mesh->Indices.push_back(face.mIndices[k] + startVertex);
 		}
 
-		// Read MeshParts
+		//Read MeshParts
 		asMeshPart* meshPart = new asMeshPart();
+
 		aiMaterial* material = scene->mMaterials[srcMesh->mMaterialIndex];
 
 		meshPart->MaterialName = material->GetName().C_Str();
@@ -128,8 +130,8 @@ void Converter::ReadMeshData(aiNode* node, int index)
 		meshPart->IndexCount = srcMesh->mNumFaces * srcMesh->mFaces->mNumIndices;
 
 		mesh->MeshParts.push_back(meshPart);
-
 	}
+
 	meshes.push_back(mesh);
 }
 
@@ -139,7 +141,7 @@ void Converter::WriteMeshData(wstring savePath)
 
 	BinaryWriter* w = new BinaryWriter(savePath);
 
-	// Save Bone
+	//Save Bone
 	w->UInt(bones.size());
 	for (asBone* bone : bones)
 	{
@@ -149,7 +151,7 @@ void Converter::WriteMeshData(wstring savePath)
 		w->Matrix(bone->Transform);
 	}
 
-	// Save Mesh
+	//Save Mesh
 	w->UInt(meshes.size());
 	for (asMesh* mesh : meshes)
 	{
@@ -160,7 +162,7 @@ void Converter::WriteMeshData(wstring savePath)
 
 		w->UInt(mesh->Indices.size());
 		w->Byte(&mesh->Indices[0], sizeof(UINT) * mesh->Indices.size());
-	
+
 		w->UInt(mesh->MeshParts.size());
 		for (asMeshPart* part : mesh->MeshParts)
 		{
@@ -175,4 +177,29 @@ void Converter::WriteMeshData(wstring savePath)
 	}
 
 	SafeDelete(w);
+}
+
+void Converter::ExportMatrial(wstring savePath, bool bOverWrite)
+{
+	// Todo
+	ReadMaterialData();
+	WriteMaterialData();
+}
+
+void Converter::ReadMaterialData()
+{
+}
+
+bool Converter::FoundMaterialData(aiMaterial* material)
+{
+	return false;
+}
+
+void Converter::WriteMaterialData(wstring savePath)
+{
+}
+
+string Converter::WriteTexture(string savePath, string file)
+{
+	return string();
 }

@@ -5,8 +5,8 @@ void LineColorDemo::Initialize()
 {
 	shader = new Shader(L"02_LineColor.fx");
 
-	vertices[0].Position = Vector3{ 0, 0, 0 };
-	vertices[1].Position = Vector3{ 0.5f, 0, 0 };
+	vertices[0].Position = Vector3(0, 0, 0);
+	vertices[1].Position = Vector3(0.5f, 0, 0);
 
 	vertices[0].Color = Color(1, 1, 0, 1);
 	vertices[1].Color = Color(1, 0, 1, 1);

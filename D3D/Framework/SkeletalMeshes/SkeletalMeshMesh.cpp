@@ -87,15 +87,14 @@ void SkeletalMesh_Mesh::Transforms(Matrix* transforms)
 	memcpy(boneDesc.Transforms, transforms, sizeof(Matrix) * MAX_BONE_COUNT);
 }
 
-void SkeletalMesh_Mesh::SetTransforms(Transform* transform)
+void SkeletalMesh_Mesh::SetTransform(Transform* trasnform)
 {
-	this->transform->Set(transform);
+	this->transform->Set(trasnform);
 }
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// SkeletalMesh_MeshPart
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//SkeletalMesh_MeshPart
+//-----------------------------------------------------------------------------
 void SkeletalMesh_MeshPart::Update()
 {
 	

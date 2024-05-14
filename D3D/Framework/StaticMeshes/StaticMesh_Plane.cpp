@@ -40,6 +40,7 @@ void StaticMesh_Plane::Create()
 
 	copy(v.begin(), v.end(), stdext::checked_array_iterator<VertexMesh*>(vertices, vertexCount));
 
+
 	vector<UINT> i;
 	for (UINT z = 0; z < countZ - 1; z++)
 	{
@@ -47,9 +48,9 @@ void StaticMesh_Plane::Create()
 		{
 			i.push_back(countX * z + x);
 			i.push_back(countX * (z + 1) + x);
-			i.push_back(countX * z + (x + 1));
+			i.push_back(countX * z  + (x + 1));
 
-			i.push_back(countX * z + (x + 1));
+			i.push_back(countX * z  + (x + 1));
 			i.push_back(countX * (z + 1) + x);
 			i.push_back(countX * (z + 1) + (x + 1));
 		}

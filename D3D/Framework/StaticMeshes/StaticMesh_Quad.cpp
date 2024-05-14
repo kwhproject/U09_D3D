@@ -23,9 +23,9 @@ void StaticMesh_Quad::Create()
 
 	vertexCount = 4;
 	vertices = new VertexMesh[vertexCount];
-	
+
 	copy(v.begin(), v.end(), stdext::checked_array_iterator<VertexMesh*>(vertices, vertexCount));
 
 	indexCount = 6;
-	indices = new UINT[indexCount]{ 0,1,2,2,1,3 };
+	indices = new UINT[indexCount]{ 0, 1, 2, 2, 1, 3 };
 }

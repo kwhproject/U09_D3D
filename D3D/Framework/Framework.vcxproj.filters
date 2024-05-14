@@ -116,25 +116,25 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renders">
-      <UniqueIdentifier>{7efc6551-985c-40dd-a085-14f9a930dacc}</UniqueIdentifier>
+      <UniqueIdentifier>{34400cdd-d4be-415a-850e-934fd848361e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Systems">
-      <UniqueIdentifier>{fe0a88b4-b338-4df5-b584-999bd90776bf}</UniqueIdentifier>
+      <UniqueIdentifier>{6e112a08-74e8-4991-aba5-18a4026d8cbc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Utilities">
-      <UniqueIdentifier>{3a5c6ed4-fc57-4ae8-882e-c9034c1bf409}</UniqueIdentifier>
+      <UniqueIdentifier>{da720dd5-2244-4ebe-9494-33d078048cbd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Viewer">
-      <UniqueIdentifier>{2208d2be-d46b-4383-8eea-70968cbb5c81}</UniqueIdentifier>
+      <UniqueIdentifier>{b8f4ac24-d70b-4e56-88c5-d30307e63406}</UniqueIdentifier>
     </Filter>
     <Filter Include="Environment">
-      <UniqueIdentifier>{d1b4e448-6e3e-410c-8769-2ab8e896ba76}</UniqueIdentifier>
+      <UniqueIdentifier>{a2237272-5b7c-4cb8-98e3-f66ae7208aeb}</UniqueIdentifier>
     </Filter>
     <Filter Include="StaticMeshes">
-      <UniqueIdentifier>{3028a64a-86a8-4ef6-85cc-e7bd6867bb78}</UniqueIdentifier>
+      <UniqueIdentifier>{ae93a525-ace3-4f01-b1a5-d6b397ee39e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="SkeletalMeshes">
-      <UniqueIdentifier>{30727002-0107-47b6-bbe6-b7fe565eb732}</UniqueIdentifier>
+      <UniqueIdentifier>{04d643be-4590-4cb6-8747-1d86c4191d30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +168,6 @@
     <ClInclude Include="Systems\Window.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Math.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\Path.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -181,6 +178,9 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\BinaryFile.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Math.h">
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Viewer\Orthographic.h">

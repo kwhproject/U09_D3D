@@ -24,10 +24,10 @@ void GetHeightDemo::Initialize()
 	desc.ByteWidth = sizeof(Vertex) * 3;
 	desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
-	D3D11_SUBRESOURCE_DATA subResource = { 0 };
-	subResource.pSysMem = vertices;
+	D3D11_SUBRESOURCE_DATA subRessource = { 0 };
+	subRessource.pSysMem = vertices;
 
-	Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
+	Check(D3D::GetDevice()->CreateBuffer(&desc, &subRessource, &vertexBuffer));
 
 }
 
@@ -42,23 +42,22 @@ void GetHeightDemo::Destroy()
 
 void GetHeightDemo::Update()
 {
-	// Terrain Parameters
+	//Terrain Paramters
 	{
+		static int pass = shader->PassCount() - 1;
+		ImGui::SliderInt("Pass", &pass, 0, shader->PassCount() - 1);
+		terrain->Pass() = pass;
 
-	static int pass = shader->PassCount() - 1;
-	ImGui::SliderInt("Pass", &pass, 0, shader->PassCount() - 1);
-	terrain->Pass() = pass;
+		static float tile = 4.f;
+		ImGui::SliderFloat("Tile", &tile, 1, 10);
+		terrain->Tile(tile);
 
-	static float tile = 4.f;
-	ImGui::SliderFloat("Tile", &tile, 1, 10);
-	terrain->Tile(tile);
-
-	static float intensity = 2.5f;
-	ImGui::SliderFloat("Intensity", &intensity, 1, 10);
-	terrain->Intensity(intensity);
+		static float intensity = 2.5f;
+		ImGui::SliderFloat("Intensity", &intensity, 1, 10);
+		terrain->Intensity(intensity);
 	}
 
-	// Tri Key Input
+	//Tri Key Input
 	{
 		if (Keyboard::Get()->Press(VK_RIGHT))
 			position.x += 20.f * Time::Delta();
@@ -70,15 +69,13 @@ void GetHeightDemo::Update()
 		else if (Keyboard::Get()->Press(VK_DOWN))
 			position.z -= 20.f * Time::Delta();
 
-		// position.y = terrain->GetHeightByInterp(position) + 1;
+		//position.y = terrain->GetHeightByInterp(position) + 1;
 		position.y = terrain->GetHeightByRaycast(position) + 1;
-
 
 
 		Matrix R, T;
 		D3DXMatrixRotationX(&R, D3DX_PI);
 		D3DXMatrixTranslation(&T, position.x, position.y, position.z);
-
 		Matrix world = R * T;
 
 		triShader->AsMatrix("World")->SetMatrix(world);
@@ -96,7 +93,6 @@ void GetHeightDemo::Render()
 
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 

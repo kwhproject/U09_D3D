@@ -5,7 +5,6 @@
 class LineColorDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -26,6 +25,4 @@ private:
 
 	Vertex vertices[2];
 	ID3D11Buffer* vertexBuffer;
-
-
 };

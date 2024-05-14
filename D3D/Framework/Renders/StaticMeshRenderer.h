@@ -32,6 +32,7 @@ protected:
 
 	UINT vertexCount = 0;
 	UINT indexCount = 0;
+
 private:
 	bool bCreatedShader = false;
 

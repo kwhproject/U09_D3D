@@ -19,6 +19,8 @@ private:
 	float bottomRadius;
 	float height;
 
+
 	UINT stackCount;
 	UINT sliceCount;
+
 };

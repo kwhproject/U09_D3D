@@ -21,12 +21,11 @@ void SkeletalMesh::ReadMesh(wstring file)
 
     BinaryReader* r = new BinaryReader(file);
 
-
-    // Read Bone
     UINT count = 0;
-    count = r->UInt();
 
-    for (UINT i = 0; i < count; i++)
+    //Read Bone
+    count = r->UInt();
+    for (UINT i = 0 ; i < count; i++)
     {
         SkeletalMesh_Bone* bone = new SkeletalMesh_Bone();
         bone->index = r->Int();
@@ -37,7 +36,7 @@ void SkeletalMesh::ReadMesh(wstring file)
         bones.push_back(bone);
     }
 
-    // Read Mesh
+    //Read Mesh
     count = r->UInt();
     for (UINT i = 0; i < count; i++)
     {
@@ -45,7 +44,7 @@ void SkeletalMesh::ReadMesh(wstring file)
 
         mesh->boneIndex = r->Int();
 
-        // Vertices
+        //Vertices
         {
             UINT count = r->UInt();
 
@@ -58,13 +57,14 @@ void SkeletalMesh::ReadMesh(wstring file)
             mesh->vertices = new SkeletalMesh::VertexSkeletalMesh[count];
             mesh->vertexCount = count;
 
-            copy(
+            copy
+            (
                 vertices.begin(), vertices.end(),
                 stdext::checked_array_iterator<SkeletalMesh::VertexSkeletalMesh*>(mesh->vertices, count)
-                );
+            );
         }
 
-        // Indices
+        //Indices
         {
             UINT count = r->UInt();
 
@@ -75,15 +75,16 @@ void SkeletalMesh::ReadMesh(wstring file)
             r->Byte(&ptr, sizeof(UINT) * count);
 
             mesh->indices = new UINT[count];
-            mesh->indexCount= count;
+            mesh->indexCount = count;
 
-            copy(
+            copy
+            (
                 indices.begin(), indices.end(),
                 stdext::checked_array_iterator<UINT*>(mesh->indices, count)
             );
         }
 
-        // MeshParts
+        //MeshPart
         UINT partCount = r->UInt();
         for (UINT p = 0; p < partCount; p++)
         {
@@ -95,14 +96,12 @@ void SkeletalMesh::ReadMesh(wstring file)
 
             meshPart->startIndex = r->UInt();
             meshPart->indexCount = r->UInt();
-            
 
             mesh->meshParts.push_back(meshPart);
         }
 
         meshes.push_back(mesh);
     }
-
 
     SafeDelete(r);
 
@@ -112,10 +111,10 @@ void SkeletalMesh::ReadMesh(wstring file)
 
 void SkeletalMesh::BindBone()
 {
+    root = bones[0];
+
     for (SkeletalMesh_Bone* bone : bones)
     {
-        root = bones[0];
-
         if (bone->parentIndex > -1)
         {
             bone->parent = bones[bone->parentIndex];
@@ -134,7 +133,6 @@ void SkeletalMesh::BindMesh()
         mesh->Binding(this);
     }
 }
-
 
 SkeletalMesh_Bone* SkeletalMesh::BoneByName(wstring index)
 {

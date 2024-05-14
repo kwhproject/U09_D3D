@@ -1,10 +1,9 @@
 #include "Framework.h"
 #include "Buffers.h"
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// VertexBuffer
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//VertexBuffer
+//-----------------------------------------------------------------------------
 VertexBuffer::VertexBuffer(void* data, UINT count, UINT stride, UINT slot, bool bCpuWrite, bool bGpuWrite)
 	: data(data)
 	, count(count)
@@ -17,7 +16,7 @@ VertexBuffer::VertexBuffer(void* data, UINT count, UINT stride, UINT slot, bool 
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
 	desc.ByteWidth = stride * count;
 	desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-
+	
 	if (bCpuWrite == false && bGpuWrite == false)
 	{
 		desc.Usage = D3D11_USAGE_IMMUTABLE;
@@ -37,6 +36,7 @@ VertexBuffer::VertexBuffer(void* data, UINT count, UINT stride, UINT slot, bool 
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	}
 
+
 	D3D11_SUBRESOURCE_DATA subResource = { 0 };
 	subResource.pSysMem = data;
 
@@ -51,13 +51,13 @@ VertexBuffer::~VertexBuffer()
 void VertexBuffer::IASet()
 {
 	UINT offset = 0;
+
 	D3D::GetDC()->IASetVertexBuffers(slot, 1, &buffer, &stride, &offset);
 }
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// IndexBuffer
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//IndexBuffer
+//-----------------------------------------------------------------------------
 IndexBuffer::IndexBuffer(void* data, UINT count)
 	: data(data)
 	, count(count)
@@ -84,10 +84,9 @@ void IndexBuffer::IASet()
 	D3D::GetDC()->IASetIndexBuffer(buffer, DXGI_FORMAT_R32_UINT, 0);
 }
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// ConstantBuffer
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//ConstantBuffer
+//-----------------------------------------------------------------------------
 ConstantBuffer::ConstantBuffer(void* data, UINT dataSize)
 	: data(data)
 	, dataSize(dataSize)
@@ -109,10 +108,10 @@ ConstantBuffer::~ConstantBuffer()
 
 void ConstantBuffer::Map()
 {
-	D3D11_MAPPED_SUBRESOURCE subResource;
-	D3D::GetDC()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
+	D3D11_MAPPED_SUBRESOURCE subRsource;
+	D3D::GetDC()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subRsource);
 	{
-		memcpy(subResource.pData, data, dataSize);
+		memcpy(subRsource.pData, data, dataSize);
 	}
 	D3D::GetDC()->Unmap(buffer, 0);
 }

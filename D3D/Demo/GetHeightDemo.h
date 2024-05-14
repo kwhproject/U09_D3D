@@ -5,7 +5,6 @@
 class GetHeightDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -18,13 +17,13 @@ private:
 	struct Vertex
 	{
 		Vector3 Position;
-
 	};
+
 
 private:
 	Shader* shader;
 	Terrain* terrain;
-
+	
 	Shader* triShader;
 	ID3D11Buffer* vertexBuffer;
 	Vector3 position = Vector3(0, 0, 0);

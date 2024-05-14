@@ -59,7 +59,7 @@ void Context::Render()
 
 	Vector3 p;
 	camera->Position(&p);
-	
+
 	Vector3 r;
 	camera->RotationDegree(&r);
 

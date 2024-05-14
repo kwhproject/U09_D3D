@@ -3,7 +3,7 @@
 
 void IndexBufferDemo::Initialize()
 {
-	shader = new Shader(L"06_VertexID.fxo");
+	shader = new Shader(L"06_VertexId.fxo");
 
 	D3DXMatrixIdentity(&world);
 
@@ -12,9 +12,8 @@ void IndexBufferDemo::Initialize()
 	vertices[1].Position = Vector3(-0.5f, +0.5f, 0.f);
 	vertices[2].Position = Vector3(+0.5f, -0.5f, 0.f);
 	vertices[3].Position = Vector3(+0.5f, +0.5f, 0.f);
-	
 
-	// Create VertexBuffer
+	//Create VertexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -25,9 +24,9 @@ void IndexBufferDemo::Initialize()
 		subResource.pSysMem = vertices;
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
-	}	
+	}
 
-	// Index Order
+	//Index Order
 	indices[0] = 0;
 	indices[1] = 1;
 	indices[2] = 2;
@@ -35,7 +34,7 @@ void IndexBufferDemo::Initialize()
 	indices[4] = 1;
 	indices[5] = 3;
 
-	// Create IndexBuffer
+	//Create IndexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -58,7 +57,7 @@ void IndexBufferDemo::Destroy()
 
 void IndexBufferDemo::Update()
 {
-	// Position
+	//Position
 	static Vector3 position;
 
 	if (Keyboard::Get()->Press('D'))
@@ -71,8 +70,7 @@ void IndexBufferDemo::Update()
 	else if (Keyboard::Get()->Press('S'))
 		position.y -= 2.f * Time::Delta();
 
-
-	// Scale
+	//Scale
 	static Vector3 scale = Vector3(1, 1, 1);
 
 	if (Keyboard::Get()->Press(VK_RIGHT))
@@ -85,10 +83,6 @@ void IndexBufferDemo::Update()
 	else if (Keyboard::Get()->Press(VK_DOWN))
 		scale.y -= 2.f * Time::Delta();
 
-	static float roll;
-
-	roll += Time::Delta();
-
 	Matrix S, T;
 	D3DXMatrixScaling(&S, scale.x, scale.y, scale.z);
 	D3DXMatrixTranslation(&T, position.x, position.y, position.z);
@@ -99,11 +93,11 @@ void IndexBufferDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 	D3D::GetDC()->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
+	
 	shader->AsMatrix("World")->SetMatrix(world);
 	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
 	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());

@@ -92,7 +92,6 @@ typedef D3DXPLANE Plane;
 #include "StaticMeshes/StaticMesh_Cube.h"
 #include "StaticMeshes/StaticMesh_Cylinder.h"
 #include "StaticMeshes/StaticMesh_Sphere.h"
-#include "StaticMeshes/CubeMapMesh.h"
 
 #include "SkeletalMeshes/SkeletalMesh.h"
 #include "SkeletalMeshes/SkeletalMeshMesh.h"

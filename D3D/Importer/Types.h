@@ -26,8 +26,22 @@ struct asMesh
 {
 	int BoneIndex;
 
-	vector<SkeletalMesh::VertexSkeletalMesh> Vertices;
+	vector<SkeletalMesh::VertexSkeletalMesh > Vertices;
 	vector<UINT> Indices;
 
 	vector<asMeshPart*> MeshParts;
+};
+
+struct asMaterial
+{
+	string Name;
+
+	Color Ambient;
+	Color Diffuse;
+	Color Specular;
+	Color Emissive;
+
+	string DiffuseFile;
+	string SpecularFile;
+	string NormalFile;
 };

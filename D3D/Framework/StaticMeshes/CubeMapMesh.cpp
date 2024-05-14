@@ -1,5 +1,5 @@
 #include "Framework.h"
-#include "CubeMapMesh.h"
+#include  "CubeMapMesh.h"
 
 CubeMapMesh::CubeMapMesh(Shader* shader)
 	: shader(shader)
@@ -18,6 +18,7 @@ CubeMapMesh::~CubeMapMesh()
 void CubeMapMesh::Texture(wstring ddsFile)
 {
 	SafeRelease(srv);
+
 
 	ddsFile = L"../../_Textures/" + ddsFile;
 	Check(D3DX11CreateShaderResourceViewFromFile(D3D::GetDevice(), ddsFile.c_str(), nullptr, nullptr, &srv, nullptr));

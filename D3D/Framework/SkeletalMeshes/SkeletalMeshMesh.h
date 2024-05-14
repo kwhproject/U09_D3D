@@ -1,8 +1,8 @@
 #pragma once
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// SkeletalMesh_Bone
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+//-----------------------------------------------------------------------------
+//SkeletalBone
+//-----------------------------------------------------------------------------
 class SkeletalMesh_Bone
 {
 public:
@@ -14,14 +14,17 @@ private:
 
 public:
 	int Index() { return index; }
+
 	wstring Name() { return name; }
-	int ParentIndex() { return parentIndex; }
+
+	int ParentIndeX() { return parentIndex; }
 	SkeletalMesh_Bone* Parent() { return parent; }
 
 	Matrix& Transform() { return transform; }
 	void Transform(Matrix& matrix) { transform = matrix; }
 
 	vector<SkeletalMesh_Bone*>& Children() { return children; }
+
 private:
 	int index;
 	wstring name;
@@ -30,13 +33,12 @@ private:
 	SkeletalMesh_Bone* parent;
 
 	Matrix transform;
-	vector<SkeletalMesh_Bone*> children;
+	vector< SkeletalMesh_Bone*> children;
 };
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// SkeletalMesh_Mesh
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//SkeletalMesh_Mesh
+//-----------------------------------------------------------------------------
 class SkeletalMesh_Mesh
 {
 public:
@@ -59,22 +61,22 @@ public:
 	int BoneIndex() { return boneIndex; }
 	SkeletalMesh_Bone* Bone() { return bone; }
 
-	void Transforms(Matrix* transforms);		// Component(bone) Space
-	void SetTransforms(Transform* transform);	// Actor(World)Transform
+	void Transforms(Matrix* transforms); //Component(Bone) Space
+	void SetTransform(Transform* transform); //Actor(World)Transform
 
 private:
 	struct BoneDesc
 	{
-		Matrix Transforms[MAX_BONE_COUNT];		// Component(bone) Space
+		Matrix Transforms[MAX_BONE_COUNT]; //Component(Bone) Space
 
 		UINT BoneIndex;
 		float Padding[3];
-	}boneDesc;
+	} boneDesc;
 
 private:
 	Shader* shader;
 
-	Transform* transform = nullptr;				// Actor(World)Transform
+	Transform* transform = nullptr; //Actor(World)Transform
 	PerFrame* perFrame = nullptr;
 
 	int boneIndex;
@@ -94,10 +96,9 @@ private:
 	vector<class SkeletalMesh_MeshPart*> meshParts;
 };
 
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-// SkeletalMesh_MeshPart
-// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
-
+//-----------------------------------------------------------------------------
+//SkeletalMesh_MeshPart
+//-----------------------------------------------------------------------------
 class SkeletalMesh_MeshPart
 {
 public:
@@ -127,5 +128,4 @@ private:
 
 	UINT startIndex;
 	UINT indexCount;
-
 };

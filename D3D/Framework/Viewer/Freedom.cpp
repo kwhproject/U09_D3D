@@ -9,7 +9,7 @@ void Freedom::Update()
 	Vector3 up = Up();
 	Vector3 right = Right();
 
-	// Move
+	//Move
 	{
 		Vector3 position;
 		Position(&position);
@@ -32,19 +32,21 @@ void Freedom::Update()
 		Position(position);
 	}
 
-	// Rotation
+
+	//Rotation
 	{
 		Vector3 rotation;
 		Rotation(&rotation);
 
 		Vector3 mouse = Mouse::Get()->GetMoveValue();
 
-		rotation.x += mouse.y * rotationSpeed * Time::Delta();
-		rotation.y += mouse.x * rotationSpeed * Time::Delta();
+		rotation.x += mouse.y * rotationSpeed* Time::Delta();
+		rotation.y += mouse.x * rotationSpeed* Time::Delta();
 		rotation.z = 0.f;
 
 		Rotation(rotation);
 	}
+
 }
 
 void Freedom::Speed(float moveSpeed, float rotationSpeed)

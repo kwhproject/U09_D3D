@@ -3,30 +3,30 @@
 class PerFrame
 {
 public:
-    PerFrame(Shader* shader);
-    ~PerFrame();
+	PerFrame(Shader* shader);
+	~PerFrame();
 
-    void Update();
-    void Render();
+	void Update();
+	void Render();
 
 private:
 	struct Desc
 	{
-        Matrix View;
-        Matrix ViewInverse;
-        Matrix Projection;
-        Matrix VP;
+		Matrix View;
+		Matrix ViewInverse;
+		Matrix Projection;
+		Matrix VP;
 
-        Plane Culling[4];
-        Plane Clipping;
+		Plane Culling[4];
+		Plane Clipping;
 
-        float Time;
-        float Padding[3];
+		float Time;
+		float Padding[3];
 	} desc;
 
 private:
-    Shader* shader;
+	Shader* shader;
 
-    ConstantBuffer* buffer;
-    ID3DX11EffectConstantBuffer* sBuffer;
+	ConstantBuffer* buffer;
+	ID3DX11EffectConstantBuffer* sBuffer;
 };

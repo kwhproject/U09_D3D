@@ -2,7 +2,7 @@
 #include "StaticMesh.h"
 
 StaticMesh::StaticMesh(Shader* shader)
-	:StaticMeshRenderer(shader)
+	: StaticMeshRenderer(shader)
 {
 	sDiffuseMap = shader->AsSRV("DiffuseMap");
 }
@@ -24,8 +24,8 @@ void StaticMesh::Render()
 {
 	if (vertexBuffer == nullptr || indexBuffer == nullptr)
 	{
-		Create();		
-
+		Create();
+		
 		vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(VertexMesh));
 		indexBuffer = new IndexBuffer(indices, indexCount);
 	}
@@ -41,6 +41,6 @@ void StaticMesh::Render()
 void StaticMesh::DiffuseMap(wstring file)
 {
 	SafeDelete(diffuseMap);
-
+	
 	diffuseMap = new Texture(file);
 }

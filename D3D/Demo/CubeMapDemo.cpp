@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CubeMapDemo.h"
+#include "StaticMeshes/CubeMapMesh.h"
 
 void CubeMapDemo::Initialize()
 {
@@ -10,28 +11,29 @@ void CubeMapDemo::Initialize()
 	sDirection = shader->AsVector("LightDirection");
 
 	sky = new Sky(L"Environment/Mountain1024.dds");
-	
+
 	CreateStaticMesh();
 
 	cubeMapShader = new Shader(L"14_CubeMap.fxo");
 	cubeMapMesh = new CubeMapMesh(cubeMapShader);
 	cubeMapMesh->Texture(L"Environment/DesertCube1024.dds");
-	cubeMapMesh->GetTransform()->Position(0, 20, 0);
-	cubeMapMesh->GetTransform()->Scale(10, 10, 10);
+	cubeMapMesh->GetTrasnform()->Position(0, 20, 0);
+	cubeMapMesh->GetTrasnform()->Scale(10, 10, 10);
 }
 
 void CubeMapDemo::Destroy()
 {
 	SafeDelete(shader);
-
+	
 	SafeDelete(quad);
 	SafeDelete(plane);
-	SafeDelete(cube);
 
+	SafeDelete(cube);
+	
 	for (UINT i = 0; i < 10; i++)
 	{
-		SafeDelete(cylinders[i]);
 		SafeDelete(spheres[i]);
+		SafeDelete(cylinders[i]);
 	}
 
 	SafeDelete(cubeMapShader);
@@ -51,12 +53,9 @@ void CubeMapDemo::Update()
 	sky->Pass(pass);
 
 	sky->Update();
-
-
-
+	
 	static bool bWire;
 	ImGui::Checkbox("Wire Frame", &bWire);
-
 
 	quad->Pass(bWire ? 1 : 0);
 	plane->Pass(bWire ? 1 : 0);
@@ -83,16 +82,16 @@ void CubeMapDemo::Render()
 {
 	sky->Render();
 
-	quad->Render();
-	plane->Render();
-
-	cube->Render();
-
 	for (UINT i = 0; i < 10; i++)
 	{
 		cylinders[i]->Render();
 		spheres[i]->Render();
 	}
+
+	cube->Render();
+	quad->Render();
+	plane->Render();
+	
 
 	cubeMapMesh->Render();
 }
@@ -113,25 +112,25 @@ void CubeMapDemo::CreateStaticMesh()
 
 	for (UINT i = 0; i < 5; i++)
 	{
-		// Cylinder Left
+		//Cylinder - Left
 		cylinders[i * 2 + 0] = new StaticMesh_Cylinder(shader, 0.3f, 0.5f, 3.f, 20, 20);
 		cylinders[i * 2 + 0]->GetTransform()->Position(-30, 6, (float)i * 15.f - 15.f);
 		cylinders[i * 2 + 0]->GetTransform()->Scale(5, 5, 5);
 		cylinders[i * 2 + 0]->DiffuseMap(L"Bricks.png");
 
-		// Cylinder Right
+		//Cylinder - Right
 		cylinders[i * 2 + 1] = new StaticMesh_Cylinder(shader, 0.3f, 0.5f, 3.f, 20, 20);
 		cylinders[i * 2 + 1]->GetTransform()->Position(+30, 6, (float)i * 15.f - 15.f);
 		cylinders[i * 2 + 1]->GetTransform()->Scale(5, 5, 5);
 		cylinders[i * 2 + 1]->DiffuseMap(L"Bricks.png");
 
-		// Sphere Left
+		//Sphere - Left
 		spheres[i * 2 + 0] = new StaticMesh_Sphere(shader, 0.5f);
 		spheres[i * 2 + 0]->GetTransform()->Position(-30, 15, (float)i * 15.f - 15.f);
 		spheres[i * 2 + 0]->GetTransform()->Scale(5, 5, 5);
 		spheres[i * 2 + 0]->DiffuseMap(L"Wall.png");
 
-		// Sphere Right
+		//Sphere - Right
 		spheres[i * 2 + 1] = new StaticMesh_Sphere(shader, 0.5f);
 		spheres[i * 2 + 1]->GetTransform()->Position(+30, 15, (float)i * 15.f - 15.f);
 		spheres[i * 2 + 1]->GetTransform()->Scale(5, 5, 5);

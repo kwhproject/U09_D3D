@@ -5,7 +5,6 @@
 class WorldDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -26,6 +25,5 @@ private:
 	Vertex vertices[6];
 	ID3D11Buffer* vertexBuffer;
 
-	Matrix world; 
-
+	Matrix world;
 };

@@ -26,7 +26,7 @@ private:
 	Shader* shader;
 	SkeletalMesh* skeletalMesh;
 
-	Transform* transform;				// World
+	Transform* transform; //World
 
-	Matrix transforms[MAX_BONE_COUNT];	// Bone(Local)
+	Matrix transforms[MAX_BONE_COUNT]; //Bone(Local)
 };

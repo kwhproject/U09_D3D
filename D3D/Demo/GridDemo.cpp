@@ -16,7 +16,7 @@ void GridDemo::Initialize()
 	vertexCount = (width + 1) * (height + 1);
 	vertices = new Vertex[vertexCount];
 
-	// Grid
+	//Grid
 	for (UINT y = 0; y <= height; y++)
 	{
 		for (UINT x = 0; x <= width; x++)
@@ -29,7 +29,7 @@ void GridDemo::Initialize()
 		}
 	}
 
-	// Create VertexBuffer
+	//Create VertexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -42,7 +42,7 @@ void GridDemo::Initialize()
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
 
-	// Index Order
+	//Index Order
 	indexCount = width * height * 6;
 	indices = new UINT[indexCount];
 
@@ -51,18 +51,18 @@ void GridDemo::Initialize()
 	{
 		for (UINT x = 0; x < width; x++)
 		{
-			indices[index + 0] = (width + 1) * (y + 0) + (x + 0);
-			indices[index + 1] = (width + 1) * (y + 1) + (x + 0);
-			indices[index + 2] = (width + 1) * (y + 0) + (x + 1);
-			indices[index + 3] = (width + 1) * (y + 0) + (x + 1);
-			indices[index + 4] = (width + 1) * (y + 1) + (x + 0);
+			indices[index + 0] = (width + 1) * y + x;
+			indices[index + 1] = (width + 1) * (y + 1) + x;
+			indices[index + 2] = (width + 1) * y  + (x + 1);
+			indices[index + 3] = (width + 1) * y  + (x + 1);
+			indices[index + 4] = (width + 1) * (y + 1) + x;
 			indices[index + 5] = (width + 1) * (y + 1) + (x + 1);
-			
+
 			index += 6;
 		}
 	}
 
-	// Create IndexBuffer
+	//Create IndexBuffer
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -74,6 +74,7 @@ void GridDemo::Initialize()
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &indexBuffer));
 	}
+
 }
 
 void GridDemo::Destroy()
@@ -98,10 +99,11 @@ void GridDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 	D3D::GetDC()->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	
 
 	static bool bWireFrame;
 	ImGui::Checkbox("WireFrame", &bWireFrame);

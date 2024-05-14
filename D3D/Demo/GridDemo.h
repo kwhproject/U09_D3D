@@ -5,7 +5,6 @@
 class GridDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -33,6 +32,5 @@ private:
 	UINT* indices;
 	ID3D11Buffer* indexBuffer;
 
-	Matrix world; 
-
+	Matrix world;
 };

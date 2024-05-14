@@ -5,8 +5,8 @@ void LineDemo::Initialize()
 {
 	shader = new Shader(L"01_Line.fx");
 
-	vertices[0].Position = Vector3{ 0, 0, 0 };
-	vertices[1].Position = Vector3{ 0.5f, 0, 0 };
+	vertices[0].Position = Vector3(0, 0, 0);
+	vertices[1].Position = Vector3(0.5f, 0, 0);
 
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));

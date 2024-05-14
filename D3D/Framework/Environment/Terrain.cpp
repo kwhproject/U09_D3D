@@ -33,7 +33,7 @@ void Terrain::Update()
 
 void Terrain::Render()
 {
-	VisibleNormal();
+	visibleNormal();
 
 	if (baseMap != nullptr)
 		shader->AsSRV("BaseMap")->SetResource(baseMap->SRV());
@@ -61,13 +61,13 @@ float Terrain::GetHeightByInterp(Vector3 position)
 	if (z < 0 || z > height - 2) return FLT_MIN;
 
 	UINT index[4];
-	index[0] = width* z + x;
-	index[1] = width* (z + 1) + x;
-	index[2] = width* z + (x + 1);
-	index[3] = width* (z + 1) + (x + 1);
-
+	index[0] = width * z + x;
+	index[1] = width * (z + 1) + x;
+	index[2] = width * z + (x + 1);
+	index[3] = width * (z + 1) + (x + 1);
+	
 	Vector3 p[4];
-	for (UINT i = 0; i < 4; i++)
+	for (UINT i = 0 ; i < 4; i++)
 		p[i] = vertices[index[i]].Position;
 
 	float ddx = position.x - p[0].x;
@@ -122,9 +122,9 @@ float Terrain::GetHeightByRaycast(Vector3 position)
 	return result.y;
 }
 
-void Terrain::VisibleNormal()
+void Terrain::visibleNormal()
 {
-	// Draw Debug Normal
+	//Draw Debug Normal
 	ImGui::Checkbox("Visible Normal", &bVisibleNormal);
 	if (bVisibleNormal)
 	{
@@ -168,7 +168,7 @@ void Terrain::CreateVertexData()
 {
 	width = heightMap->GetWidth();
 	height = heightMap->GetHeight();
-
+	
 	vector<Color> pixels;
 	heightMap->ReadPixel(&pixels);
 
@@ -216,7 +216,7 @@ void Terrain::CreateIndexData()
 
 void Terrain::CreateNormalData()
 {
-	for (UINT i = 0; i < indexCount / 3; i++)
+	for(UINT i = 0 ; i < indexCount / 3 ; i++)
 	{
 		UINT index0 = indices[i * 3 + 0];
 		UINT index1 = indices[i * 3 + 1];
@@ -238,8 +238,7 @@ void Terrain::CreateNormalData()
 		vertices[index2].Normal += normal;
 	}
 
+
 	for (UINT i = 0; i < vertexCount; i++)
-	{
 		D3DXVec3Normalize(&vertices[i].Normal, &vertices[i].Normal);
-	}
 }

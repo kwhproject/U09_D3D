@@ -5,7 +5,6 @@
 class TerrainDemo : public IExecute
 {
 public:
-	// Inherited via IExecute
 	virtual void Initialize() override;
 	virtual void Destroy() override;
 	virtual void Update() override;
@@ -18,4 +17,5 @@ public:
 private:
 	Shader* shader;
 	Terrain* terrain;
+	
 };

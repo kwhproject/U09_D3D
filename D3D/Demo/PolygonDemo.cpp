@@ -5,17 +5,17 @@ void PolygonDemo::Initialize()
 {
 	shader = new Shader(L"03_Pass.fx");
 
-	// Polygon1
-	vertices[0].Position = Vector3{ -0.5f, 0.0f, 0.f };
-	vertices[1].Position = Vector3{ +0.0f, 0.5f, 0.f };
-	vertices[2].Position = Vector3{ +0.5f, 0.0f, 0.f };
+	//Polygon1
+	vertices[0].Position = Vector3(-0.5f, 0.0f, 0.f);
+	vertices[1].Position = Vector3(+0.0f, 0.5f, 0.f);
+	vertices[2].Position = Vector3(+0.5f, 0.0f, 0.f);
 
-	// Polygon1
-	vertices2[0].Position = Vector3{ -0.5f, 0.0f - 0.5f, 0.f };
-	vertices2[1].Position = Vector3{ +0.0f, 0.5f - 0.5f, 0.f };
-	vertices2[2].Position = Vector3{ +0.5f, 0.0f - 0.5f, 0.f };
+	//Polygon2
+	vertices2[0].Position = Vector3(-0.5f, 0.0f - 0.5f, 0.f);
+	vertices2[1].Position = Vector3(+0.0f, 0.5f - 0.5f, 0.f);
+	vertices2[2].Position = Vector3(+0.5f, 0.0f - 0.5f, 0.f);
 
-	// Create VertexBuffer1
+	//Create VertexBuffer1
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -28,7 +28,7 @@ void PolygonDemo::Initialize()
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer));
 	}
 
-	// Create VertexBuffer2
+	//Create VertexBuffer2
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
@@ -40,7 +40,6 @@ void PolygonDemo::Initialize()
 
 		Check(D3D::GetDevice()->CreateBuffer(&desc, &subResource, &vertexBuffer2));
 	}
-	
 }
 
 void PolygonDemo::Destroy()
@@ -58,7 +57,7 @@ void PolygonDemo::Render()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-
+	
 	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
@@ -66,7 +65,7 @@ void PolygonDemo::Render()
 
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer2, &stride, &offset);
 
-	static Color baseColor = Color(0.4f, 0.1f, 0.6f, 1.f);
+	static Color baseColor = Color(0.72f, 0.23f, 0.123f, 1.f);
 	ImGui::ColorEdit3("BaseColor", baseColor);
 	shader->AsVector("BaseColor")->SetFloatVector(baseColor);
 

@@ -35,9 +35,9 @@ void SkeletalMeshRenderer::Render()
 {
 	for (SkeletalMesh_Mesh* mesh : skeletalMesh->Meshes())
 	{
-		mesh->SetTransforms(transform);		// World
+		mesh->SetTransform(transform); //World
 		mesh->Render();
-	}
+	}	
 }
 
 void SkeletalMeshRenderer::ReadMesh(wstring file)

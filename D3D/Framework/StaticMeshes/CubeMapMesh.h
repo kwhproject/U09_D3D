@@ -12,7 +12,7 @@ public:
 	void Render();
 
 public:
-	Transform* GetTransform() { return mesh->GetTransform(); }
+	Transform* GetTrasnform() { return mesh->GetTransform(); }
 
 private:
 	Shader* shader;
