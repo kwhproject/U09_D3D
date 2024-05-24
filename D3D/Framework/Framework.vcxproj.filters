@@ -119,7 +119,7 @@
     <ClCompile Include="SkeletalMeshes\SkeletalMeshClip.cpp">
       <Filter>SkeletalMeshes</Filter>
     </ClCompile>
-    <ClCompile Include="SkeletalMeshAnimator.cpp">
+    <ClCompile Include="SkeletalMeshes\SkeletalMeshAnimator.cpp">
       <Filter>SkeletalMeshes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -268,7 +268,7 @@
     <ClInclude Include="SkeletalMeshes\SkeletalMeshClip.h">
       <Filter>SkeletalMeshes</Filter>
     </ClInclude>
-    <ClInclude Include="SkeletalMeshAnimator.h">
+    <ClInclude Include="SkeletalMeshes\SkeletalMeshAnimator.h">
       <Filter>SkeletalMeshes</Filter>
     </ClInclude>
   </ItemGroup>
