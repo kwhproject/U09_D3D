@@ -29,6 +29,14 @@ cbuffer CB_Bones
     uint BoneIndex;
 };
 
+
+
+
+
+Texture2DArray TransformsMap;
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// SetAnimationWorld (TweenMode)
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 struct KeyframeDesc
 {
     int Clip;
@@ -57,11 +65,6 @@ cbuffer CB_Animationframe
 {
     TweenFrame TweenFrames;
 };
-
-
-
-Texture2DArray TransformsMap;
-
 void SetAnimationWorld(inout matrix world, VertexInput input)
 {
     float indices[4] = { input.BlendIndices.x, input.BlendIndices.y, input.BlendIndices.z, input.BlendIndices.w };
@@ -149,11 +152,91 @@ void SetAnimationWorld(inout matrix world, VertexInput input)
     world = mul(transform, world);
 }
 
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// SetBlendingWorld (BlendMode)
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+struct BlendDesc
+{
+    uint Mode;
+    float Alpha;
+    float2 Padding;
+
+    KeyframeDesc Clips[3];
+};
+
+cbuffer CB_Blendingframe
+{
+    BlendDesc BlendingFrames;
+};
+
+void SetBlendingWorld(inout matrix world, VertexInput input)
+{
+    float indices[4] = { input.BlendIndices.x, input.BlendIndices.y, input.BlendIndices.z, input.BlendIndices.w };
+    float weights[4] = { input.BlendWeights.x, input.BlendWeights.y, input.BlendWeights.z, input.BlendWeights.w };
+	
+    float4 c0, c1, c2, c3; // CurrFrame
+    float4 n0, n1, n2, n3; // NextFrame
+    
+    matrix transform = 0;
+    matrix curr = 0, next = 0;
+    matrix currAnim[3];
+    matrix anim;
+    
+    [unroll(4)]
+    for (int i = 0; i < 4; i++)
+    {
+        [unroll(3)]
+        for (int j = 0; j < 3; j++)
+        {
+            // Current Frame
+            c0 = TransformsMap.Load(int4(indices[i] * 4 + 0, BlendingFrames.Clips[j].CurrFrame, BlendingFrames.Clips[j].Clip, 0)); //_11_12_13_14
+            c1 = TransformsMap.Load(int4(indices[i] * 4 + 1, BlendingFrames.Clips[j].CurrFrame, BlendingFrames.Clips[j].Clip, 0)); //_21_22_23_24
+            c2 = TransformsMap.Load(int4(indices[i] * 4 + 2, BlendingFrames.Clips[j].CurrFrame, BlendingFrames.Clips[j].Clip, 0)); //_31_32_33_34
+            c3 = TransformsMap.Load(int4(indices[i] * 4 + 3, BlendingFrames.Clips[j].CurrFrame, BlendingFrames.Clips[j].Clip, 0)); //_41_42_43_44
+            curr = matrix(c0, c1, c2, c3);
+            
+            // Next Frame
+            n0 = TransformsMap.Load(int4(indices[i] * 4 + 0, BlendingFrames.Clips[j].NextFrame, BlendingFrames.Clips[j].Clip, 0)); //_11_12_13_14
+            n1 = TransformsMap.Load(int4(indices[i] * 4 + 1, BlendingFrames.Clips[j].NextFrame, BlendingFrames.Clips[j].Clip, 0)); //_21_22_23_24
+            n2 = TransformsMap.Load(int4(indices[i] * 4 + 2, BlendingFrames.Clips[j].NextFrame, BlendingFrames.Clips[j].Clip, 0)); //_31_32_33_34
+            n3 = TransformsMap.Load(int4(indices[i] * 4 + 3, BlendingFrames.Clips[j].NextFrame, BlendingFrames.Clips[j].Clip, 0)); //_41_42_43_44
+            next = matrix(n0, n1, n2, n3);
+            
+            // Inter Frame Lerp
+            currAnim[j] = lerp(curr, next, BlendingFrames.Clips[j].Time);
+        }
+        
+        float alpha = BlendingFrames.Alpha;
+        int clipIndex[2] = { 0, 1 };
+        if (alpha > 1)
+        {
+            clipIndex[0] = 1;
+            clipIndex[1] = 2;
+            
+            alpha -= 1.f;
+        }
+        
+        // Inter Clip Lerp
+        anim = lerp(currAnim[clipIndex[0]], currAnim[clipIndex[1]], alpha);
+        
+        // Add Skinning Weights
+        transform += mul(weights[i], anim);
+    };
+    
+    world = mul(transform, world);
+}
+
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// VS
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 VertexOutput VS(VertexInput input)
 {
     VertexOutput output;
 	
-    SetAnimationWorld(World, input);
+    if (BlendingFrames.Mode == 0)
+        SetAnimationWorld(World, input);
+    else
+        SetBlendingWorld(World, input);
 	
     output.Position = WorldPosition(input.Position); //00 World
     output.Position = ViewProjection(output.Position);
@@ -165,6 +248,9 @@ VertexOutput VS(VertexInput input)
     return output;
 }
 
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// PS
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 float4 PS_Diffuse(VertexOutput input) : SV_Target
 {
     float3 normal = normalize(input.Normal);
@@ -179,7 +265,9 @@ float4 PS_WireFrame(VertexOutput input) : SV_Target
     return float4(0.5f, 0.5f, 0.5f, 1);
 }
 
-
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
+// Pass
+// 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 technique11 T0
 {
 	P_VP(P0, VS, PS_Diffuse)
