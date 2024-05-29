@@ -25,7 +25,12 @@ private:
 	void RaceCondition(int& count);
 	void LoopQuater();
 
+	void SetTimer();
+
 private:
 	float progress = 0.f;
+
+	mutex m;
+	Timer timer[2];
 
 };
